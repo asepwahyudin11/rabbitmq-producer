@@ -12,7 +12,10 @@
     if (empty($data)) {
         $data = "Hello World!";
     }
-    $msg = new AMQPMessage($data);
+    $msg = new AMQPMessage(
+        $data,
+        array('delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT)
+    );
 
     $channel->basic_publish($msg, '', 'hello');
 
